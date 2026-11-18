@@ -1,0 +1,51 @@
+{
+  "name": "dsh-cot-compress",
+  "version": "0.6.0",
+  "description": "Cut a finished turn's reasoning into chunks, extract E1 records per chunk, merge them into one sha256-keyed replacement per segment, and replay it forever — DeepSeek Harness plugin | 回合结束后按块提取推理要点、合并成替换文本，每段只决定一次、之后永远发同一版本",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "cordis",
+    "plugin",
+    "reasoning",
+    "cot",
+    "kv-cache",
+    "prompt-cache"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0",
+    "dsh": ">=0.2.2-rc.1"
+  },
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "slots",
+        "layout"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "node --test test/cot-compress.test.mjs"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/schemastery": "^3.19.0"
+  }
+}

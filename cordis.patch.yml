@@ -1,0 +1,22 @@
+# Mounts dsh-cot-compress with the code defaults.
+#
+# It compresses every session's reasoning for the NEXT turn (the current turn is
+# never rewritten). Each finished reasoning segment is cut into chunks, the key
+# records are extracted per chunk, validated, and merged into one replacement
+# text. One sha256-keyed version per segment is replayed forever, so the request
+# prefix (and the provider prompt cache) stays stable. The session log is not
+# modified.
+#
+# Logging and persistence are OFF by default (no file paths are shipped). To turn
+# them on, add an override row to your profile's cordis.patch.yml, e.g.
+#
+#   - id: dsh-cot-compress
+#     config:
+#       logFile: 'D:/somewhere/cot-compress.jsonl'
+#       storeFile: 'D:/somewhere/cot-compress-store.jsonl'
+#
+# An id override replaces the whole config of this row (no deep merge), so list
+# every field you want to change. See README.md for all fields.
+- insert:
+    - id: dsh-cot-compress
+      name: 'dsh-cot-compress'
